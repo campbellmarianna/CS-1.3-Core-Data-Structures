@@ -18,7 +18,7 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Decode digits from binary (base 2)
-    # TODO: Decode digits from hexadecimal (base 16)
+    # Decode digits from hexadecimal (base 16)
     digits = digits[::-1]
     power = 0
     result = 0
@@ -30,7 +30,7 @@ def decode(digits, base):
         product = power_value * character_index
         result += product  # 1 * 0
     return result
-    # TODO: Decode digits from any base (2 up to 36)
+    # Decode digits from any base (2 up to 36)
     # ...
 
 
@@ -44,11 +44,48 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    # ...
+    if base == 2:
+        binary_str = ''
+        current_power = 0
+        power_array = []
+        finished = False
+
+        while finished is False:
+            bit_value = 2**current_power # initially zero, 1, 2
+            if bit_value < number: # Current power is less than the number
+                power_array.insert(0, current_power) # Insert current power to the front of the array
+                print("Power_array: {}".format(power_array))
+                current_power += 1
+                print("Current_power: {}".format(current_power))
+
+            elif bit_value == number: # Current power is equal to the number
+                power_array.insert(0, current_power)
+                finished = True
+
+            else: # The current power is more than the number
+                finished = True
+                print("Bit_value: {} is bigger than number: {}".format(bit_value, number))
+
+        for power in power_array: # ex: power = 1
+            value = 2**power # ex: value = 2
+            if value <= number:
+                print("Number: {}".format(number))
+                number -= value
+                print("Deincremented Number: {}".format(number))
+                binary_str += "1"
+
+            else: # bit_value is greater than number
+                binary_str += "0"
+        return binary_str
+    # result = '{0:02b}'.format(number)
     # TODO: Encode number in hexadecimal (base 16)
-    # ...
+    if base == 16:
+        hex_str = ""
+        current_power == 0
+        list_of_powers = [] # List of all the possible powers but it will be sorted from greatest to largest
     # TODO: Encode number in any base (2 up to 36)
     # ...
+    # return result
 
 
 def convert(digits, base1, base2):
@@ -87,6 +124,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
     # decodes given digits in given base
-    print(decode('100', 2))
+    print(encode(10, 16))

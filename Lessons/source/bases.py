@@ -17,53 +17,21 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
-    # turn digits into a string
-    # digit_str = str(digits)
-    # create var power and set it to -1
+    # Decode digits from binary (base 2)
+    # TODO: Decode digits from hexadecimal (base 16)
     digits = digits[::-1]
     power = 0
-    # create result variable
     result = 0
-    # create var length of string
-    length_of_string = len(digits)
-    # loop through digits
-    for i in range(length_of_string ):  # range = [0, 1]
+    for i in range(len(digits)):  # range = [0, 1]
         print("Current Character index: {}".format(i))
-        # the_index = i
-        # new_index = the_index
-        # print("Current Character New index: {}".format(new_index))
-        # print("Current Ch~aracter: {}".format(digit_str[i]))
-        # charc_int = int(i)
-        # increment power
-        # power = length_of_string - new_index - 1
-        power_value = 2 ** i  # 1
-        print("Current Power: {}\nPower Value: {}".format(i, power_value))
-
-
+        power_value = base ** i  # 1
         selected_char = digits[i]  # 0
         character_index = string.hexdigits.find(selected_char) # 0
-        print("Selected character index: {}".format(character_index))
         product = power_value * character_index
-        print("Product: {}".format(product))
         result += product  # 1 * 0
-        # print("Power: {}".format(power))
-        # # if zero
-        # if charc_int == 0:
-        #     # continue
-        #     continue
-        # # if 1:
-        # if charc_int == 1:
-        #     # then do 2 with an exponent of power
-        #     result = 2**power
-        #     print("Result: {}".format(result))
     return result
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
     # TODO: Decode digits from any base (2 up to 36)
     # ...
-    # result = digits * 2
-    # return result
 
 
 def encode(number, base):
@@ -121,4 +89,4 @@ def main():
 if __name__ == '__main__':
     main()
     # decodes given digits in given base
-    # print(decode('100', 2))
+    print(decode('100', 2))

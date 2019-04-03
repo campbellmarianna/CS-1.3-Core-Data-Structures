@@ -142,13 +142,15 @@ def convert(digits, base1, base2):
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
+    # ..
     # TODO: Convert digits from base 2 to base 10 (and vice versa)
     # ...
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
+    number = decode(digits, base1)
+    encode_str = encode(number, base2)
+    return encode_str
 
 
 def main():

@@ -4,7 +4,9 @@ def linear_search(array, item):
     """return the first index of item in array or None if item is not found"""
     # implement linear_search_iterative and linear_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    return linear_search_iterative(array, item)
+
+
+    # return linear_search_iterative(array, item)
     # return linear_search_recursive(array, item)
 
 
@@ -33,7 +35,23 @@ def binary_search(array, item):
 
 def binary_search_iterative(array, item):
     # TODO: implement binary search iteratively here
-    pass
+    found = False
+    while len(array) > 0 and found == False:
+        left = 0
+        right = len(array) - 1
+        midpoint = right // 2
+        # if len(array) == 1
+        if item == array[midpoint]:
+            print("array {}, item {}, midpoint {}".format(array, item, midpoint))
+            return midpoint
+        elif item > midpoint:
+            print("array {}, item {}, midpoint {}".format(array, item, midpoint))
+            array = array[midpoint+1:]
+        else:
+            print("array {}, item {}, midpoint {}".format(array, item, midpoint))
+            array = array[:midpoint]
+
+
     # once implemented, change binary_search to call binary_search_iterative
     # to verify that your iterative implementation passes all tests
 
@@ -43,3 +61,6 @@ def binary_search_recursive(array, item, left=None, right=None):
     pass
     # once implemented, change binary_search to call binary_search_recursive
     # to verify that your recursive implementation passes all tests
+
+if __name__ == '__main__':
+    print(binary_search([1,3,4,7,8,10,11], 11))

@@ -22,7 +22,7 @@ def decode(digits, base):   # Inspired by Jackson Ho
     digits = digits[::-1]
     power = 0
     result = 0
-    for i in range(len(digits)):  # range = [0, 1]
+    for i in range(len(digits)):  # range = [0, 1, 3]
         print("Current Character index: {}".format(i))
         power_value = base ** i  # 1
         selected_char = digits[i]  # 0
@@ -172,4 +172,4 @@ def main():
 if __name__ == '__main__':
     # main()
     # decodes given digits in given base
-    print(encode(10, 16))
+    print(convert('4095', 10, 2))

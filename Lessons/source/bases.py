@@ -44,40 +44,44 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # Encode number in binary (base 2)
-    # if base == 2:
-    #     binary_str = ''
-    #     current_power = 0
-    #     power_array = []
-    #     finished = False
-    #
-    #     while finished is False:
-    #         bit_value = 2**current_power # initially zero, 1, 2
-    #         if bit_value < number: # Current power is less than the number
-    #             power_array.insert(0, current_power) # Insert current power to the front of the array
-    #             print("Power_array: {}".format(power_array))
-    #             current_power += 1
-    #             print("Current_power: {}".format(current_power))
-    #
-    #         elif bit_value == number: # Current power is equal to the number
-    #             power_array.insert(0, current_power)
-    #             finished = True
-    #
-    #         else: # The current power is more than the number
-    #             finished = True
-    #             print("Bit_value: {} is bigger than number: {}".format(bit_value, number))
-    #
-    #     for power in power_array: # ex: power = 1
-    #         value = 2**power # ex: value = 2
-    #         if value <= number:
-    #             print("Number: {}".format(number))
-    #             number -= value
-    #             print("Deincremented Number: {}".format(number))
-    #             binary_str += "1"
-    #
-    #         else: # bit_value is greater than number
-    #             binary_str += "0"
-    #     return binary_str
-    # result = '{0:02b}'.format(number)
+    if base == 2:
+        binary_str = ''
+        current_power = 0
+        power_array = []
+        finished = False
+
+        while finished is False:
+            bit_value = 2**current_power # initially zero, 1, 2
+            # print("Bit_value: {}".format(bit_value))
+            if bit_value < number: # Current power is less than the number
+                power_array.insert(0, current_power) # Insert current power to the front of the array
+                # print("Power_array: {}".format(power_array))
+                current_power += 1
+                # print("Current_power: {}".format(current_power))
+
+            elif bit_value == number: # Current power is equal to the number
+                power_array.insert(0, current_power)
+                print("Power_array: {}".format(power_array))
+                finished = True
+
+            else: # The current power is more than the number
+                finished = True
+                print("Bit_value: {} is bigger than number: {}".format(bit_value, number))
+
+        for power in power_array: # ex: power = 1
+            value = 2**power # ex: value = 2
+            # print("Value: {}".format(power_array))
+            if value <= number:
+                # print("Number: {}".format(number))
+                number -= value
+                # print("Deincremented Number: {}".format(number))
+                binary_str += "1"
+
+            else: # bit_value is greater than number
+                binary_str += "0"
+                print("Binary_str: {}".format(binary_str))
+        return binary_str
+    result = '{0:02b}'.format(number)
     # Encode number in hexadecimal (base 16)
     # if base == 16:
     #     hex_str = ""
@@ -105,31 +109,31 @@ def encode(number, base):
     #
     #     return hex_str
     # Encode number in any base (2 up to 36)
-    encode_str = ''
-    current_power = 0
-    finished = False
-    list_of_powers = []
-    while finished is False:  # Get all the possible power of a base for the number
-        power_value = base**current_power
-        if power_value < number:
-            list_of_powers.insert(0, current_power)
-            current_power += 1
-
-        elif power_value == number:
-            list_of_powers.insert(0, current_power)
-            finished = True
-
-        else:  # The current power made the base too big
-            finished = True
-
-    for power in list_of_powers:
-        power_value = base ** power
-        limit = int(number / power_value)
-        number -= power_value * limit
-
-        encode_str += string.printable[limit]
-
-    return encode_str
+    # encode_str = ''
+    # current_power = 0
+    # finished = False
+    # list_of_powers = []
+    # while finished is False:  # Get all the possible power of a base for the number
+    #     power_value = base**current_power
+    #     if power_value < number:
+    #         list_of_powers.insert(0, current_power)
+    #         current_power += 1
+    #
+    #     elif power_value == number:
+    #         list_of_powers.insert(0, current_power)
+    #         finished = True
+    #
+    #     else:  # The current power made the base too big
+    #         finished = True
+    #
+    # for power in list_of_powers:
+    #     power_value = base ** power
+    #     limit = int(number / power_value)
+    #     number -= power_value * limit
+    #
+    #     encode_str += string.printable[limit]
+    #
+    # return encode_str
 
 
 def convert(digits, base1, base2):
@@ -172,4 +176,4 @@ def main():
 if __name__ == '__main__':
     # main()
     # decodes given digits in given base
-    print(convert('4095', 10, 2))
+    print(encode(10, 2))

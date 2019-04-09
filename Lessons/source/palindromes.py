@@ -20,13 +20,28 @@ def is_palindrome(text):
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
     # create var to hold input_string
+    input_string = text
     # reverse the string and call it reversed_string
+    reversed_string = input_string[::-1]
+    truthy_counter = 0
+    falsey_counter = 0
     # loop through input_string
+    for input_charc in input_string:
         # loop through reversed_string
-        # check if input_charc is the same as reversed_charc
-        # increment counter by 1
+        for reversed_charc in reversed_string:
+            print('input_charc: {}, reversed_charc: {}, truthy_counter: {}, falsey_counter: {}'.format(input_charc, reversed_charc, truthy_counter, falsey_counter))
+            # check if input_charc is the same as reversed_charc
+            if input_charc == reversed_charc:
+                # increment counter by 1
+                truthy_counter += 1
+            else:
+                falsey_counter += 1
     # Check if counter is equal to length of string
+    if truthy_counter > falsey_counter:
         # return True
+        return True
+    else:
+        return False
     # Otherwise raise ValueError "This is not a palindrome" or False
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
@@ -54,4 +69,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print(is_palindrome('noon')) # implementat that passes 2nd, 3rd, 4th base cases
+    # in test_is_palindrome_with_mirrored_strings test func

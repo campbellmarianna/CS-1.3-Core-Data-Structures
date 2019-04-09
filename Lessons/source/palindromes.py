@@ -19,7 +19,15 @@ def is_palindrome(text):
 
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
-    pass
+    # create var to hold input_string
+    # reverse the string and call it reversed_string
+    # loop through input_string
+        # loop through reversed_string
+        # check if input_charc is the same as reversed_charc
+        # increment counter by 1
+    # Check if counter is equal to length of string
+        # return True
+    # Otherwise raise ValueError "This is not a palindrome" or False
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
 

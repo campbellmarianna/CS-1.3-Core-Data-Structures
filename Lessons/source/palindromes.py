@@ -13,31 +13,31 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
+    # make text all lowercase
+    clean_text = text.lower()
+    # clean_text = lowered_text.translate(str.maketrans('', '', string.punctuation))
+    print(clean_text)
     # create var to hold input_string
-    input_string = text
+    input_string = clean_text
+
     # reverse the string and call it reversed_string
     reversed_string = input_string[::-1]
-    truthy_counter = 0
-    falsey_counter = 0
+    counter = 0
     # loop through input_string
-    for input_charc in input_string:
-        # loop through reversed_string
-        for reversed_charc in reversed_string:
-            print('input_charc: {}, reversed_charc: {}, truthy_counter: {}, falsey_counter: {}'.format(input_charc, reversed_charc, truthy_counter, falsey_counter))
-            # check if input_charc is the same as reversed_charc
-            if input_charc == reversed_charc:
-                # increment counter by 1
-                truthy_counter += 1
-            else:
-                falsey_counter += 1
+    for index, input_charc in enumerate(input_string, 0):
+        print('input_charc: {}, index: {}'.format(input_charc, index))
+        # check if input_charc is the same as reversed_charc at that same index
+        if input_charc == reversed_string[index]:
+            # increment counter by 1
+            counter += 1
     # Check if counter is equal to length of string
-    if truthy_counter > falsey_counter:
+    if counter == len(input_string):
         # return True
         return True
     else:
@@ -46,10 +46,68 @@ def is_palindrome_iterative(text):
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
 
+def is_palindrome_iterative2(text):
+    # keep track of letters going forwards and backwards
+    forwards = 0
+    backwards = len(text) - 1
 
-def is_palindrome_recursive(text, left=None, right=None):
+    # until the indices cross over one another
+    while forwards < backwards:
+        forward_letter = text[forwards].lower()
+        backward_letter = text[backwards].lower()
+        # if forward_letter is not alphanumeric, then increment forwards
+        # and start the loop over
+        if forward_letter.isalnum() is False:
+            forwards += 1
+            continue
+
+        # if backward_letter is not alphanumeric, then decrement backwards
+        # and start the loop over
+        if backward_letter.isalnum() is False:
+            backwards -= 1
+            continue
+
+        # if the letters are the same, then this is still possibly a palindrome
+        if forward_letter == backward_letter:
+            forwards += 1
+            backwards -= 1
+        # if not, then its not a palindrome
+        else:
+            return False
+    return True
+
+def is_palindrome_recursive(text, forwards=None, backwards=None):
     # TODO: implement the is_palindrome function recursively here
-    pass
+    if forwards is None and backwards is None:
+        forwards = 0
+        backwards = len(text) - 1
+
+    # if forwards is greater than backwards then return True
+    if forwards > backwards:
+        return True
+
+    forward_letter = text[forwards].lower()
+    backward_letter = text[backwards].lower()
+
+    if forward_letter.isalnum() is False:
+        forwards += 1
+        print('forwards: {}, backwards: {}'.format(forwards, backwards))
+        return is_palindrome_recursive(text, forwards, backwards)
+
+    if backward_letter.isalnum() is False:
+        backwards -= 1
+        print('forwards: {}, backwards: {}'.format(forwards, backwards))
+        return is_palindrome_recursive(text, forwards, backwards)
+
+    if forward_letter == backward_letter:
+        forwards += 1
+        backwards -= 1
+        print('forwards: {}, backwards: {}'.format(forwards, backwards))
+        return is_palindrome_recursive(text, forwards, backwards)
+    # return false for letters that don't match
+    else:
+        return False
+
     # once implemented, change is_palindrome to call is_palindrome_recursive
     # to verify that your iterative implementation passes all tests
 
@@ -70,5 +128,4 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(is_palindrome('noon')) # implementat that passes 2nd, 3rd, 4th base cases
-    # in test_is_palindrome_with_mirrored_strings test func
+    print(is_palindrome_recursive('noon'))

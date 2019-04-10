@@ -9,8 +9,14 @@ def contains(text, pattern):
     target_index = 0
     text_length = len(text) - 1
     text_index = 0
+
+    if pattern == '':
+        return True
+    print('target_index: {}, target_length: {}, text_index: {}, text_length: {}'.format(target_index, target_length, text_index, text_length))
     # print('target_index: {}, target_length: {}, text_index: {}, text_length: {}'.format(target_index, target_length, text_index, text_length))
-    while target_length > target_index and text_length > text_index:
+    while target_length >= target_index and text_length >= text_index:
+
+        print('***Compare target_index {} to text_target {}'.format(pattern[target_index], text[text_index]))
         if pattern[target_index] == text[text_index]:
             target_index += 1
             text_index += 1
@@ -70,4 +76,4 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(contains('abc', 'abc'))
+    print(contains('ababc', 'ab'))

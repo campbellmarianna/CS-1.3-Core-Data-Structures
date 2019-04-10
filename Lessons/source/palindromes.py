@@ -77,7 +77,7 @@ def is_palindrome_iterative2(text):
     return True
 
 def is_palindrome_recursive(text, left=None, right=None):
-    # TODO: implement the is_palindrome function recursively here
+    # implement the is_palindrome function recursively here
     if left is None and right is None:
         left = 0
         right = len(text) - 1
@@ -89,27 +89,22 @@ def is_palindrome_recursive(text, left=None, right=None):
     left_letter = text[left].lower()
     right_letter = text[right].lower()
 
+    # if left_letters is not alphanumeric
     if left_letter.isalnum() is False:
         left += 1
-        print('left: {}, right: {}'.format(left, right))
         return is_palindrome_recursive(text, left, right)
 
     if right_letter.isalnum() is False:
         right -= 1
-        print('left: {}, right: {}'.format(left, right))
         return is_palindrome_recursive(text, left, right)
 
     if left_letter == right_letter:
         left += 1
         right -= 1
-        print('left: {}, right: {}'.format(left, right))
         return is_palindrome_recursive(text, left, right)
-    # return false for letters that don't match
-    else:
-        return False
 
-    # once implemented, change is_palindrome to call is_palindrome_recursive
-    # to verify that your iterative implementation passes all tests
+    # return false for letters that don't match
+    return False
 
 
 def main():

@@ -76,34 +76,34 @@ def is_palindrome_iterative2(text):
             return False
     return True
 
-def is_palindrome_recursive(text, forwards=None, backwards=None):
+def is_palindrome_recursive(text, left=None, right=None):
     # TODO: implement the is_palindrome function recursively here
-    if forwards is None and backwards is None:
-        forwards = 0
-        backwards = len(text) - 1
+    if left is None and right is None:
+        left = 0
+        right = len(text) - 1
 
-    # if forwards is greater than backwards then return True
-    if forwards > backwards:
+    # if left is greater than right then return True
+    if left > right:
         return True
 
-    forward_letter = text[forwards].lower()
-    backward_letter = text[backwards].lower()
+    left_letter = text[left].lower()
+    right_letter = text[right].lower()
 
-    if forward_letter.isalnum() is False:
-        forwards += 1
-        print('forwards: {}, backwards: {}'.format(forwards, backwards))
-        return is_palindrome_recursive(text, forwards, backwards)
+    if left_letter.isalnum() is False:
+        left += 1
+        print('left: {}, right: {}'.format(left, right))
+        return is_palindrome_recursive(text, left, right)
 
-    if backward_letter.isalnum() is False:
-        backwards -= 1
-        print('forwards: {}, backwards: {}'.format(forwards, backwards))
-        return is_palindrome_recursive(text, forwards, backwards)
+    if right_letter.isalnum() is False:
+        right -= 1
+        print('left: {}, right: {}'.format(left, right))
+        return is_palindrome_recursive(text, left, right)
 
-    if forward_letter == backward_letter:
-        forwards += 1
-        backwards -= 1
-        print('forwards: {}, backwards: {}'.format(forwards, backwards))
-        return is_palindrome_recursive(text, forwards, backwards)
+    if left_letter == right_letter:
+        left += 1
+        right -= 1
+        print('left: {}, right: {}'.format(left, right))
+        return is_palindrome_recursive(text, left, right)
     # return false for letters that don't match
     else:
         return False

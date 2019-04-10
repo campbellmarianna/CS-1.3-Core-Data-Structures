@@ -5,27 +5,34 @@ def contains(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # Implement contains here (iteratively and/or recursively)
+    # Keeping track of target values
     target_length = len(pattern) - 1
     target_index = 0
+    # Keeping track of text values
     text_length = len(text) - 1
     text_index = 0
 
+    match = None
+    # All strings contains empty string
     if pattern == '':
         return True
-    print('target_index: {}, target_length: {}, text_index: {}, text_length: {}'.format(target_index, target_length, text_index, text_length))
-    # print('target_index: {}, target_length: {}, text_index: {}, text_length: {}'.format(target_index, target_length, text_index, text_length))
+    # Check if we passed the end of the text or the pattern
     while target_length >= target_index and text_length >= text_index:
-
-        print('***Compare target_index {} to text_target {}'.format(pattern[target_index], text[text_index]))
+        # Checking if current pattern and text letters match
         if pattern[target_index] == text[text_index]:
             target_index += 1
             text_index += 1
+            # If we passed the end of the pattern only then we have found the match
             if target_index > target_length:
                 return True
+        # If it is not a match and were still on the first letter of the pattern
+        # then increment text_index
+        elif pattern[target_index] != text[text_index] and target_index == 0:
+            text_index += 1
+        # If it is not a match and were past the first letter of the pattern
+        # reset the pattern index
         elif pattern[target_index] != text[text_index] and target_index > 0:
             target_index = 0
-        elif pattern[target_index] != text[text_index] and target_index == 0:
-            input_index += 1
 
     return False
 
@@ -34,7 +41,40 @@ def find_index(text, pattern):
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
+    # Implement find_index here (iteratively and/or recursively)
+    # Keeping track of target values
+    target_length = len(pattern) - 1
+    target_index = 0
+    # Keeping track of text values
+    text_length = len(text) - 1
+    text_index = 0
+
+    match = 0
+    # All strings contains empty string
+    if pattern == '':
+        return match
+    # Check if we passed the end of the text or the pattern
+    while target_length >= target_index and text_length >= text_index:
+        #check if zeroth indices of text and pattern match
+        if target_index == 0 and pattern[target_index] == text[text_index]:
+            match = text_index
+        # Checking if current pattern and text letters match
+        if pattern[target_index] == text[text_index]:
+            target_index += 1
+            text_index += 1
+            # If we passed the end of the pattern only then we have found the match
+            if target_index > target_length:
+                return match
+        # If it is not a match and were still on the first letter of the pattern
+        # then increment text_index
+        elif pattern[target_index] != text[text_index] and target_index == 0:
+            text_index += 1
+        # If it is not a match and were past the first letter of the pattern
+        # reset the pattern index
+        elif pattern[target_index] != text[text_index] and target_index > 0:
+            target_index = 0
+
+    return None # pattern not found
 
 
 def find_all_indexes(text, pattern):
@@ -76,4 +116,4 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(contains('ababc', 'ab'))
+    print(find_index('abc', 'a'))

@@ -82,15 +82,67 @@ def find_all_indexes(text, pattern):
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
+    # Keeping track of target values
+    target_length = len(pattern)
+    target_index = 0
+    # Keeping track of text values
+    text_length = len(text)
+    text_index = 0
+
+    match = []
+    # if pattern is empty, then return all indices
+    if pattern == '':
+        for index in range(len(text)):
+            match.append(index)
+        return match
+
+    # Check if we passed the end of the text
+    while text_length > text_index:
+        # Checking if current pattern and text letters match
+        if pattern[target_index] == text[text_index]:
+            # check if we're looking at zeroth indices of text and pattern
+            if target_index == 0:
+                print('Text Index: {}'.format(text_index))
+                print("Letter Match: {}".format(pattern[target_index]))
+                match.append(text_index)
+
+            print("Letter Match: {}".format(pattern[target_index]))
+            target_index += 1
+            text_index += 1
+            # if we reach the end of text, but not the end of target then
+            # we did not actually find match
+            if text_index >= text_length and target_index < target_length:
+                match.pop()
+
+            # If we passed the end of the pattern only then we have found a match
+            # reset to find the next match
+            if target_index >= target_length:
+                target_index = 0
+                continue
+        # If it is not a match
+        else:
+            # If we're still on the first letter of the pattern
+            # then increment text_index
+            if target_index == 0:
+                print("Letter Mismatch: {}".format(pattern[target_index]))
+                text_index += 1
+            # If we're past the first letter of the pattern
+            # reset the pattern index
+            else:  # target_index > 0
+                print("Letter Mismatch: {}".format(pattern[target_index]))
+                target_index = 0
+                match.pop()
+
+    return match # pattern not found
+
 
 
 def test_string_algorithms(text, pattern):
-    found = contains(text, pattern)
-    print('contains({!r}, {!r}) => {}'.format(text, pattern, found))
-    # TODO: Uncomment these lines after you implement find_index
-    index = find_index(text, pattern)
-    print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
+    # found = contains(text, pattern)
+    # print('contains({!r}, {!r}) => {}'.format(text, pattern, found))
+    # # TODO: Uncomment these lines after you implement find_index
+    # index = find_index(text, pattern)
+    # print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
     # TODO: Uncomment these lines after you implement find_all_indexes
     indexes = find_all_indexes(text, pattern)
     print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
@@ -115,5 +167,5 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    print(find_index('abc', 'a'))
+    main()
+    # print(find_index('abc', 'a'))

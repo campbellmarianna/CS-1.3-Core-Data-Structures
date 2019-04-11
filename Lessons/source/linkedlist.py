@@ -23,6 +23,7 @@ class LinkedList(object):
         if iterable is not None:
             for item in iterable:
                 self.append(item)
+                self.size += 1
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -54,31 +55,38 @@ class LinkedList(object):
         """Return True if this linked list is empty, or False."""
         return self.head is None
 
+# Prior thought process: 0(n) no matter what you have to loop
+# through each bucket in the LinkedList.
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: 0(n) for n nodes in the list because
+        we have to iterate over all n nodes and count 1 for each"""
         # Node counter initialized to zero
-        node_count = 0
+        node_count = 0 # Constant time to assign a variable to an integar
         # Start at the head node
-        node = self.head
+        node = self.head # Constant time to assign a variable reference
         # Loop until the node is None, which is one node too far past the tail
-        while node is not None:
+        while node is not None: # Always n interations because no early exit
             # Count one for this node
-            node_count += 1
+            node_count += 1 # 0(1)
             # Skip to the next node
-            node = node.next
+            node = node.next # 0(1)
         # Now node_count contains the number of nodes
-        return node_count
+        return node_count # 0(1)
 
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: 0(n)
+        Worst case running time: 0(n) if the item is near the tail of the list """
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node at the given index and return its data
+        # Find the node at the given index and return its data
+        # call item method
+        items = self.items() # Theta(n)
+        # return item at given index in items
+        return items[index] # 0(n)
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or

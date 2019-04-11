@@ -35,9 +35,10 @@ class StringsTest(unittest.TestCase):
         assert contains('banana', 'na') is True  # multiple occurrences
         assert contains('ababc', 'abc') is True  # overlapping prefix
         assert contains('bananas', 'nas') is True  # overlapping prefix
-        # TODO: Write more test cases that check complex patterns or edge cases
-        # You'll need a lot more than this to test your algorithm's robustness
-        # ...
+        # Write more test cases that check complex patterns or edge cases
+        assert contains('phenomenon', 'no') is True # multiple occurrences
+        assert contains('falafel', 'fel') # overlapping prefix
+
 
     def test_find_index_with_matching_patterns(self):
         # Positive test cases (examples) with matching patterns

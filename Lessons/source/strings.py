@@ -118,6 +118,9 @@ def find_all_indexes(text, pattern):
             # reset to find the next match
             if target_index >= target_length:
                 target_index = 0
+                # deincrement the text index to see if there is another pattern
+                # within the prior match
+                text_index -= 2 # This number needs to be dynamic
                 continue
         # If it is not a match
         else:

@@ -97,6 +97,7 @@ class LinkedList(object):
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
+        # Create a new node to hold the given item
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.

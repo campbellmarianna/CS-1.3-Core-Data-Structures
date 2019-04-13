@@ -97,7 +97,17 @@ class LinkedList(object):
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
+        # create a counter set it to negative 1
         # Create a new node to hold the given item
+        # check of the given index is equal to 0
+            # prepend new node
+        # Check if the given index is equal to the size
+            # append the new node
+        # Get to the node right before the node at the given index
+            # increment counter by 1
+            # check if the counter is equal to the given index
+        # set the new node.next to previous node.next
+        # set previous to new_node.next
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -138,6 +148,7 @@ class LinkedList(object):
         node = self.head  # Constant time to assign a variable reference
         # Loop until the node is None, which is one node too far past the tail
         while node is not None:  # Up to n iterations if we don't exit early
+            print(node)
             # Check if this node's data satisfies the given quality function
             if quality(node.data):  # Constant time to call quality function
                 # We found data satisfying the quality function, so exit early
@@ -238,4 +249,6 @@ def test_linked_list():
 
 
 if __name__ == '__main__':
-    test_linked_list()
+    # test_linked_list()
+    ll = LinkedList(['A', 'B', 'C'])
+    print(ll.find(lambda item: item == 'B'))

@@ -97,17 +97,34 @@ class LinkedList(object):
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
-        # create a counter set it to negative 1
+        # Previous node index initialized to zero
+        previous_node_index = 0
+        # Node counter initialized to zero
+        node_counter = -1
         # Create a new node to hold the given item
-        # check of the given index is equal to 0
-            # prepend new node
-        # Check if the given index is equal to the size
-            # append the new node
+        new_node = Node(item)
+        # Check if new node will be inserted at the beginning
+        if index == 0 && node_counter == 0:
+            self.prepend(new_node)
+        # Check if new node will be inserted at the end
+        if index == self.size && node_counter = self.size:
+            self.append(new_node)
+        # Set the index of the previous node
+        previous_node_index = index - 1
+        # Start at the head node
+        node = self.head
         # Get to the node right before the node at the given index
-            # increment counter by 1
-            # check if the counter is equal to the given index
-        # set the new node.next to previous node.next
-        # set previous to new_node.next
+        while node is not None:
+            # increment node counter by 1
+            node_counter += 1
+            # check if the given index is somewhere in the middle
+            if index == node_counter and node_counter == previous_node_index:
+                # set the new node.next to previous node.next
+                new_node.next = node.next
+                # set previous.next to new_node
+                node.next = new_node
+            else: # Go to the next node
+                node = node.next
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -251,4 +268,5 @@ def test_linked_list():
 if __name__ == '__main__':
     # test_linked_list()
     ll = LinkedList(['A', 'B', 'C'])
-    print(ll.find(lambda item: item == 'B'))
+    ll.insert_at_index(0, 'HEY') # index, item
+    print(ll)

@@ -7,8 +7,10 @@
 - Pictures and diagrams are required
 - Crediting Format Source: (Link to place)
 - attribute source
+
 ## Tip
 - Start a draft
+
 ## Homework (This week!)
 - 5 to 6 bullet points (headers for article)
 

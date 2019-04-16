@@ -76,7 +76,7 @@ class LinkedList(object):
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: 0(n)
+        Best case running time: 0(n) if the index is near the beginning of the list
         Worst case running time: 0(n) if the item is near the tail of the list """
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
@@ -90,71 +90,60 @@ class LinkedList(object):
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: 0(1) if the index is the first or last node.
+        Worst case running time: 0(n) if the item is near tail of the list"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node before the given index and insert item after it
+        # Find the node before the given index and insert item after it
         # create a counter set it to negative 1
-        node_counter = -1
-
-        # start at the head
-        node = self.head
+        node_counter = -1 # Constant time to assign a variable
         # If there is no first node append it to the list
-        if node == None:
+        if node == None: # Constant time to compare values
             self.append(item)
-            return
+            return # Constant time to break out of function
         # check of the given index is equal to 0
-        if index == 0:
+        if index == 0: # Constant time to compare values
             # prepend new node
-            self.prepend(item)
-            return
+            self.prepend(item) # Prepend takes constant time
+            return # Constant time to break out of function
         # Check if the given index is equal to the size
-        if index == self.size:
+        if index == self.size: # Constant time to compare values
             # append the new node
-            self.append(item)
-            return
+            self.append(item) # Append takes constant time
+            return # Constant time to break out of function
 
         # Initialize the previous node index
-        prev_node_index = 0
+        prev_node_index = 0 # Constant time to assign a variable
         # Set to the index of the node before the given index
-        prev_node_index = index - 1
+        prev_node_index = index - 1 # Constant time to assign a variable
         # Initialize the previous node
         prev_node = None
-
+        # start at the head
+        node = self.head # Constant time to assign a variable reference
         # Get to the node right before the node at the given index
-        while node is not None:
+        while node is not None: # Up to n iterations if we don't exit early
             # increment counter by 1
-            node_counter += 1
+            node_counter += 1 # Constant time to reassign a variable
             # check if the counter is equal to the given index
-            if node_counter == prev_node_index:
-                prev_node = node
+            if node_counter == prev_node_index: # Constant time to compare values
+                prev_node = node # Constant time to reassign a variable
                 # create a new node to hold the given item
-                new_node = Node(item)
+                new_node = Node(item) # Constant time to assign a variable
                 # set the new node.next to previous node.next
-                new_node.next = prev_node.next
+                new_node.next = prev_node.next # Constant time to reassign a variable
                 # set previous to new_node.next
-                prev_node.next = new_node
+                prev_node.next = new_node # Constant time to reassign a variable
                 # New node is added increment size
-                self.size += 1
-                return
+                self.size += 1 # Constant time to reassign a variable
+                return # Constant time to break out of function
             # otherwise go to next node
-            node = node.next
-
-        # while counter != index:  # O(n) keep iterating until the counter match the index
-        #     previous_node = current_node  # O(1) reassign the previous node to the current node
-        #     current_node = current_node.next  # O(1) reassign the current node to the next node
-        #     counter += 1
-
-        # new_node = Node(item)  # O(1) Instantiate a new node
-        # previous_node.next = new_node  # O(1) Change the next pointer of the previous node to the new node
-        # new_node.next = current_node  # O(1) assign the new node next pointer to the current node
-        # self.size += 1
+            node = node.next # Constant time to reassign a variable
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) because we ony change the last
+        node and never loop through all nodes."""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -170,7 +159,8 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) because we ony change the first
+        node and never loop through all nodes."""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -206,22 +196,23 @@ class LinkedList(object):
     def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
         using the same node, or raise ValueError if old_item is not found.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: Omega(1) if item is near the head of the list.
+        Worst case running time: O(n) if item is near the tail of the list or
+        not present and we need to loop through all n nodes in the list."""
         # Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
         # Start at the head node
         node = self.head  # Constant time to assign a variable reference
         # tranverse nodes
-        while node is not None:
+        while node is not None: # Up to n iterations if we don't exit early
             # check if node data matches old item
-            if node.data == old_item:
+            if node.data == old_item: # Constant time to compare values
                 # assign new_item to node.data
-                node.data = new_item
+                node.data = new_item # Constant time to reassign a variable
                 # Break out of function
-                return
+                return # Constant time to break out of function
             # Otherwise go to the next node
-            node = node.next
+            node = node.next # Constant time to reassign a variable
         else: # If the old item is not found raise a value error
             raise ValueError('Old item not found : {}'.format(old_item))
 

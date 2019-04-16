@@ -82,10 +82,17 @@ class LinkedList(object):
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # Find the node at the given index and return its data
-        # call item method
-        items = self.items() # Theta(n)
-        # return item at given index in items
-        return items[index] # 0(n)
+        # check if given index is the head
+        if index == 0:
+            return self.head.data
+        # check if given index is the tail
+        elif index == self.size -1:
+            return self.tail.data
+        else:
+            # call item method
+            items = self.items() # Theta(n)
+            # return item at given index in items
+            return items[index] # 0(n)
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
@@ -98,6 +105,8 @@ class LinkedList(object):
         # Find the node before the given index and insert item after it
         # create a counter set it to negative 1
         node_counter = -1 # Constant time to assign a variable
+        # start at the head
+        node = self.head # Constant time to assign a variable reference
         # If there is no first node append it to the list
         if node == None: # Constant time to compare values
             self.append(item)
@@ -119,8 +128,6 @@ class LinkedList(object):
         prev_node_index = index - 1 # Constant time to assign a variable
         # Initialize the previous node
         prev_node = None
-        # start at the head
-        node = self.head # Constant time to assign a variable reference
         # Get to the node right before the node at the given index
         while node is not None: # Up to n iterations if we don't exit early
             # increment counter by 1
@@ -300,7 +307,7 @@ def test_linked_list():
 
 
 if __name__ == '__main__':
-    # test_linked_list()
-    ll = LinkedList(['A', 'B', 'C'])
+    test_linked_list()
+    # ll = LinkedList(['A', 'B', 'C'])
     # ll.replace('C', '3')
     # print(ll)

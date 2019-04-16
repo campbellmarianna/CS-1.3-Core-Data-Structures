@@ -54,8 +54,9 @@ class LinkedStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
-        # TODO: Remove and return top item, if any
+        Running time: O(1) because we ony delete the head or the first and don't
+        have to traverse the rest of the list."""
+        # Remove and return top item, if any
         # save the item to be deleted
         item = self.peek()
         # delete the item from the list

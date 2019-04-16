@@ -19,3 +19,6 @@ Book Resource: [Python Crash Course](http://bedford-computing.co.uk/learning/wp-
 
 [DAY 3] I learned that recursive functions are the same as for loops under the hood.
 - [Cool Wordsmith's Internet Anagram Server](http://www.wordsmith.org/anagram/)
+
+[DAY 5] When you see node = node.next in a Linkedlist implementation, first we ask the node what is the next node then we assign it to node
+-[Linkedlist Resoureful Article Part 2](https://medium.com/basecs/whats-a-linked-list-anyway-part-1-d8b7e6508b9d)

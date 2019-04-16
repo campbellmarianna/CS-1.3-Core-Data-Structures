@@ -23,7 +23,6 @@ class LinkedList(object):
         if iterable is not None:
             for item in iterable:
                 self.append(item)
-                self.size += 1
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -88,7 +87,7 @@ class LinkedList(object):
         # return item at given index in items
         return items[index] # 0(n)
 
-    def insert_at_index(self, index, item):
+    def insert_at_index_1(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
         Best case running time: ??? under what conditions? [TODO]
@@ -98,33 +97,127 @@ class LinkedList(object):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
         # Previous node index initialized to zero
-        previous_node_index = 0
+        # previous_node_index = 0
+        # Node counter initialized to zero
+        # node_counter = -1
+        # Create a new node to hold the given item
+        # new_node = Node(item)
+        # Check if new node will be inserted at the beginning
+        # if index == 0 && node_counter == 0:
+            # self.prepend(new_node)
+        # Check if new node will be inserted at the end
+        # if index == self.size && node_counter = self.size:
+            # self.append(new_node)
+        # Set the index of the previous node
+        # previous_node_index = index - 1
+        # Start at the head node
+        # node = self.head
+        # Get to the node right before the node at the given index
+        # while node is not None:
+            # increment node counter by 1
+            # node_counter += 1
+            # check if the given index is somewhere in the middle
+            # if index == node_counter and node_counter == previous_node_index:
+                # set the new node.next to previous node.next
+                # new_node.next = node.next
+                # set previous.next to new_node
+                # node.next = new_node
+            # else: # Go to the next node
+                # node = node.next
         # Node counter initialized to zero
         node_counter = -1
-        # Create a new node to hold the given item
-        new_node = Node(item)
-        # Check if new node will be inserted at the beginning
-        if index == 0 && node_counter == 0:
-            self.prepend(new_node)
-        # Check if new node will be inserted at the end
-        if index == self.size && node_counter = self.size:
-            self.append(new_node)
-        # Set the index of the previous node
-        previous_node_index = index - 1
+        # Create a flag to track if we have found the given item
+        found = False
         # Start at the head node
         node = self.head
-        # Get to the node right before the node at the given index
-        while node is not None:
-            # increment node counter by 1
+        # if the linkedlist is empty do something
+        if node is None:
+            # Create a new node to hold the given item
+            # new_node = Node(item)
+            self.append(item)
+
+        while not found and node is not None:
+            # Keep track of current node index
             node_counter += 1
-            # check if the given index is somewhere in the middle
-            if index == node_counter and node_counter == previous_node_index:
-                # set the new node.next to previous node.next
-                new_node.next = node.next
-                # set previous.next to new_node
-                node.next = new_node
-            else: # Go to the next node
-                node = node.next
+            # Check if the given index is the first node in the linkedlist
+            if index == 0 and node_counter == 0:
+                # get that node and sets its data to the given item
+                node.data = item
+                # self.tail.data = item
+                # found = True
+            # check if node is at the back of the LinkedList
+            # if index == self.length() - 1 and index == node_counter :
+                # grab that node and set that node's data to given item
+                # node.data = item
+                # found = True
+            # otherwise compare the counter to the given index
+            if index == node_counter:
+                node.data = item
+                found = True
+                # set that nodes data to the given item
+            # Go to the next node
+            node = node.next
+    def insert_at_index_2(self, index, item):
+        """Insert the given item at the given index in this linked list, or
+        raise ValueError if the given index is out of range of the list size.
+        Best case running time: ??? under what conditions? [TODO]
+        Worst case running time: ??? under what conditions? [TODO]"""
+        # Check if the given index is out of range and if so raise an error
+        if not (0 <= index <= self.size):
+            raise ValueError('List index out of range: {}'.format(index))
+        # Find the node before the given index and insert item after it
+        # Node counter initialized to zero
+        node_counter = -1
+        # Create a flag to track if we have found the given item
+        found = False
+        # Start at the head node
+        node = self.head
+        # if the linkedlist is empty do something
+        if node is None:
+            # Create a new node to hold the given item
+            # new_node = Node(item)
+            self.append(item)
+
+        while not found and node is not None:
+            # print("I'm HERE")
+            # Keep track of current node index
+            node_counter += 1
+            # Check if the given index is the first node in the linkedlist
+            if index == 0 and node_counter == 0:
+                # get that node and sets its data to the given item
+                self.prepend(item)
+                found = True
+            # otherwise compare the counter to the given index
+            if index == node_counter:
+                node.data = item
+                found = True
+                # set that nodes data to the given item
+            # Go to the next node
+            node = node.next
+
+    def insert_at_index(self, index, item):
+        if index == 0:  # If the user want to prepend
+            self.prepend(item)
+            return
+
+        elif index == self.size:
+            self.append(item)
+            return
+
+        previous_node = None
+        current_node = self.head
+
+        counter = 0
+
+        while counter != index:  # O(n) keep iterating until the counter match the index
+            previous_node = current_node  # O(1) reassign the previous node to the current node
+            current_node = current_node.next  # O(1) reassign the current node to the next node
+            counter += 1
+
+        new_node = Node(item)  # O(1) Instantiate a new node
+        previous_node.next = new_node  # O(1) Change the next pointer of the previous node to the new node
+        new_node.next = current_node  # O(1) assign the new node next pointer to the current node
+        self.size += 1
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -138,6 +231,7 @@ class LinkedList(object):
         else:
             # Otherwise insert new node after tail
             self.tail.next = new_node
+        self.size += 1
         # Update tail to new node regardless
         self.tail = new_node
 
@@ -153,6 +247,7 @@ class LinkedList(object):
         else:
             # Otherwise insert new node before head
             new_node.next = self.head
+        self.size += 1
         # Update head to new node regardless
         self.head = new_node
 
@@ -226,6 +321,7 @@ class LinkedList(object):
                     previous.next = None
                 # Update tail to the previous node regardless
                 self.tail = previous
+            self.size -= 1
         else:
             # Otherwise raise an error to tell the user that delete has failed
             raise ValueError('Item not found: {}'.format(item))
@@ -267,6 +363,7 @@ def test_linked_list():
 
 if __name__ == '__main__':
     # test_linked_list()
-    ll = LinkedList(['A', 'B', 'C'])
-    ll.insert_at_index(0, 'HEY') # index, item
+    ll = LinkedList()
+    ll.insert_at_index(0, 'B') # index, item
+    ll.insert_at_index(0, 'A')
     print(ll)

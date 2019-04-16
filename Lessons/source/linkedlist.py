@@ -208,7 +208,7 @@ class LinkedList(object):
         using the same node, or raise ValueError if old_item is not found.
         Best case running time: ??? under what conditions? [TODO]
         Worst case running time: ??? under what conditions? [TODO]"""
-        # TODO: Find the node containing the given old_item and replace its
+        # Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
         # Start at the head node
         node = self.head  # Constant time to assign a variable reference
@@ -222,6 +222,8 @@ class LinkedList(object):
                 return
             # Otherwise go to the next node
             node = node.next
+        else: # If the old item is not found raise a value error
+            raise ValueError('Old item not found : {}'.format(old_item))
 
 
     def delete(self, item):

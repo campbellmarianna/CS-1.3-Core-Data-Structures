@@ -210,7 +210,19 @@ class LinkedList(object):
         Worst case running time: ??? under what conditions? [TODO]"""
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        pass
+        # Start at the head node
+        node = self.head  # Constant time to assign a variable reference
+        # tranverse nodes
+        while node is not None:
+            # check if node data matches old item
+            if node.data == old_item:
+                # assign new_item to node.data
+                node.data = new_item
+                # Break out of function
+                return
+            # Otherwise go to the next node
+            node = node.next
+
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -296,7 +308,6 @@ def test_linked_list():
 
 if __name__ == '__main__':
     # test_linked_list()
-    # ll = LinkedList(['I', 'love', 'dogs'])
-    # ll.insert_at_index(2, 'kind') # index, item
-    # ll.insert_at_index(0, 'A')
-    print(ll)
+    ll = LinkedList(['A', 'B', 'C'])
+    # ll.replace('C', '3')
+    # print(ll)

@@ -1,5 +1,5 @@
 #!python
-
+# -*- coding: utf-8 -*-
 from linkedlist import LinkedList
 
 
@@ -35,14 +35,14 @@ class LinkedStack(object):
         Best and worst case running time: O(1) because we add one node to the top of the
         the stack and never loop through all nodes."""
         # Push given item
-        # append item to list
+        # Append item to list
         self.list.prepend(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
         # Return top item, if any
-        # check if stack is empty
+        # Check if stack is empty
         if self.is_empty() == True:
             return None
         else:
@@ -57,7 +57,7 @@ class LinkedStack(object):
         Running time: O(1) because we ony delete the head or the first and don't
         have to traverse the rest of the list."""
         # Remove and return top item, if any
-        # save the item to be deleted
+        # Save the item to be deleted
         item = self.peek()
         # delete the item from the list
         self.list.delete(item)
@@ -83,30 +83,49 @@ class ArrayStack(object):
 
     def is_empty(self):
         """Return True if this stack is empty, or False otherwise."""
-        # TODO: Check if empty
+        # Check if empty
+        if not self.list:
+            return True
+        else: # If first is not empty
+            return False
 
     def length(self):
         """Return the number of items in this stack."""
-        # TODO: Count number of items
+        return len(self.list)
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
-        # TODO: Insert given item
+        Running time: O(1) because we ony change the first
+        element and never loop through all elements."""
+        # Insert given item
+        self.list.append(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
-        # TODO: Return top item, if any
+        # Return top item, if any
+        # Check of stack is empty
+        if self.is_empty() == True:
+            return None
+        last_item_index = self.length() - 1
+        return self.list[last_item_index]
 
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
-        # TODO: Remove and return top item, if any
+        Running time: O(1) because we ony change the pop the last element
+        and never loop through all elements."""
+        # Remove and return top item, if any
+        # Check of stack is empty
+        if self.is_empty() == True: # Constant time to compare values
+            # raise error
+            raise ValueError('Stack is empty')
+        else:
+            return self.list.pop() # Constant time to pop an element from a list
+            # https://wiki.python.org/moin/TimeComplexity
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-Stack = LinkedStack
-# Stack = ArrayStack
+# Stack = LinkedStack
+Stack = ArrayStack

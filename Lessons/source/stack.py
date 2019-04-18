@@ -47,7 +47,7 @@ class LinkedStack(object):
             return None
         else:
             # return item at index
-            return self.list.get_at_index(0)
+            return self.list.head.data
 
 
 
@@ -57,6 +57,9 @@ class LinkedStack(object):
         Running time: O(1) because we ony delete the head or the first and don't
         have to traverse the rest of the list."""
         # Remove and return top item, if any
+        # Raise value error if stack is empty
+        if is_empty() == True:
+            raise ValueError("Stack is empty")
         # Save the item to be deleted
         item = self.peek()
         # delete the item from the list
@@ -107,8 +110,7 @@ class ArrayStack(object):
         # Check of stack is empty
         if self.is_empty() == True:
             return None
-        last_item_index = self.length() - 1
-        return self.list[last_item_index]
+        return self.list[-1]
 
     def pop(self):
         """Remove and return the item on the top of this stack,
@@ -117,7 +119,7 @@ class ArrayStack(object):
         and never loop through all elements."""
         # Remove and return top item, if any
         # Check of stack is empty
-        if self.is_empty() == True: # Constant time to compare values
+        if self.is_empty(): # Constant time to compare values
             # raise error
             raise ValueError('Stack is empty')
         else:

@@ -115,7 +115,7 @@ class ArrayStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(1) because we ony change the pop the last element
+        Running time: O(1) because we take off the last element
         and never loop through all elements."""
         # Remove and return top item, if any
         # Check of stack is empty

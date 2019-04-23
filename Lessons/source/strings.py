@@ -41,95 +41,90 @@ def find_index(text, pattern):
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # Implement find_index here (iteratively and/or recursively)
-    # Keeping track of target values
-    target_length = len(pattern) - 1
-    target_index = 0
-    # Keeping track of text values
-    text_length = len(text) - 1
-    text_index = 0
-
-    match = 0
-    # All strings contains empty string
     if pattern == '':
-        return match
-    # Check if we passed the end of the text or the pattern
-    while target_length >= target_index and text_length >= text_index:
-        #check if zeroth indices of text and pattern match
-        if target_index == 0 and pattern[target_index] == text[text_index]:
-            match = text_index
-        # Checking if current pattern and text letters match
-        if pattern[target_index] == text[text_index]:
-            target_index += 1
-            text_index += 1
-            # If we passed the end of the pattern only then we have found the match
-            if target_index > target_length:
-                return match
-        # If it is not a match and were still on the first letter of the pattern
-        # then increment text_index
-        elif pattern[target_index] != text[text_index] and target_index == 0:
-            text_index += 1
-        # If it is not a match and were past the first letter of the pattern
-        # reset the pattern index
-        elif pattern[target_index] != text[text_index] and target_index > 0:
-            target_index = 0
+        return 0
+    for t_index, t_char in enumerate(text):
+        for p_index, p_char in enumerate(pattern):
+            # check if more characters in the text match characters in the pattern
+            text_char = text[t_index + p_index]
+            # check if letters are the same
+            if text_char == p_char:
+                continue
+            # they are not the same
+            else:
+                break
+        else:                                                                     # Really helpful resource to find solution: https://www.python-course.eu/python3_for_loop.php
+            # all characters in the pattern matched in the text
+            return t_index
 
-    return None # pattern not found
-    
+    # tried all possible starting indexes in text, never found a perfect match
+    return None
+
 
 def find_all_indexes(text, pattern):
-    """Return the starting index of the first occurrence of pattern in text,
-    or None if not found.
-    """
+    """Return a list of starting indexes of all occurrences of pattern in text,
+    or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # Implement find_index here (iteratively and/or recursively)
-    # Keeping track of target values
-    target_length = len(pattern) - 1
-    target_index = 0
-    # Keeping track of text values
-    text_length = len(text) - 1
-    text_index = 0
+    # # Keeping track of target values
+    # target_length = len(pattern)
+    # target_index = 0
+    # # Keeping track of text values
+    # text_length = len(text)
+    # text_index = 0
+    #
+    # match = []
+    # # if pattern is empty, then return all indices
+    # if pattern == '':
+    #     for index in range(len(text)):
+    #         match.append(index)
+    #     return match
+    #
+    # # Check if we passed the end of the text
+    # while text_length > text_index:
+    #     # Checking if current pattern and text letters match
+    #     if pattern[target_index] == text[text_index]:
+    #         # check if we're looking at zeroth indices of text and pattern
+    #         if target_index == 0:
+    #             # print('Text Index: {}'.format(text_index))
+    #             # print("Letter Match: {}".format(pattern[target_index]))
+    #             match.append(text_index)
+    #
+    #         # print("Letter Match: {}".format(pattern[target_index]))
+    #         target_index += 1
+    #         text_index += 1
+    #         # if we reach the end of text, but not the end of target then
+    #         # we did not actually find match
+    #         if text_index >= text_length and target_index < target_length:
+    #             match.pop()
+    #
+    #         # If we passed the end of the pattern only then we have found a match
+    #         # reset to find the next match
+    #         if target_index >= target_length:
+    #             text_index -= target_length # go back and check the overlapping indices
+    #             target_index = 0
+    #             # deincrement the text index to see if there is another pattern
+    #             # within the prior match
+    #             # text_index -= 2 # This number needs to be dynamic
+    #             continue
+    #     # If it is not a match
+    #     else:
+    #         # If we're still on the first letter of the pattern
+    #         # then increment text_index
+    #         if target_index == 0:
+    #             # print("Letter Mismatch: {}".format(pattern[target_index]))
+    #             text_index += 1
+    #         # If we're past the first letter of the pattern
+    #         # reset the pattern index
+    #         else:  # target_index > 0
+    #             # print("Letter Mismatch: {}".format(pattern[target_index]))
+    #             target_index = 0
+    #             match.pop()
+    #
+    # return match # pattern not found
+    pass
 
-    match = []
-    # if pattern is empty, then return all indices
-    if pattern == '':
-        for index in range(len(text)):
-            match.append(index)
-        return match
 
-    # Check if we passed the end of the text
-    while text_length >= text_index:
-        # check if zeroth indices of text and pattern match
-        if target_index == 0 and pattern[target_index] == text[text_index]:
-            match.append(text_index)
-
-        # Checking if current pattern and text letters match
-        if pattern[target_index] == text[text_index]:
-            target_index += 1
-            text_index += 1
-            # if we reach the end of text, but not the end of target then
-            # we did not actually find match
-            if text_index > text_length and target_index <= target_length:
-                match.pop()
-
-            # If we passed the end of the pattern only then we have found a match
-            # reset to find the next match
-            if target_index > target_length:
-                text_index -= target_length # go back and check the overlapping indices
-                target_index = 0
-                continue
-        # If it is not a match and were still on the first letter of the pattern
-        # then increment text_index
-        elif pattern[target_index] != text[text_index] and target_index == 0:
-            text_index += 1
-        # If it is not a match and were past the first letter of the pattern
-        # reset the pattern index
-        elif pattern[target_index] != text[text_index] and target_index > 0:
-            target_index = 0
-            match.pop()
-
-    return match # pattern not found
 
 def test_string_algorithms(text, pattern):
     # found = contains(text, pattern)

@@ -27,7 +27,7 @@ class StringsTest(unittest.TestCase):
         assert contains('abc', 'ac') is False  # important to test close cases
         assert contains('abc', 'az') is False  # first letter, but not last
         assert contains('abc', 'abz') is False  # first 2 letters, but not last
-        # TODO: Write more negative test cases with assert is False statements
+        # Write more negative test cases with assert is False statements
         assert contains('abcabc', 'abcb') is False # first letters, but not the last one
         assert contains('abcabc', 'abcc') is False # first letters, but not the last one
 
@@ -82,7 +82,7 @@ class StringsTest(unittest.TestCase):
         # Write more test cases that check complex patterns or edge cases
         # You'll need a lot more than this to test your algorithm's robustness
         assert find_index('phenomenon', 'no') == 3 # multiple occurrences
-        assert find_index('phenomenon', 'enon') == 5 # overlaping prefix
+        assert find_index('phenomenon', 'enon') == 6 # overlaping prefix
         assert find_index('phenomenon', 'non') == 7 # overlapping prefix
 
     def test_find_all_indexes_with_matching_patterns(self):

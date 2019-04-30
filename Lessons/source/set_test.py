@@ -16,8 +16,8 @@ class SetTest(unittest.TestCase):
         assert s.contains(2) is True
 
     def test_add(self):
-        s = Set()
+        s = Set([1, 2, 3])
         s.add(3)
         s.add(4)
         s.add(5)
-        assert s.size == 3
+        assert s.size == 5

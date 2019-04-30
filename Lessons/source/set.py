@@ -13,18 +13,17 @@ class Set(object):
                 self.add(element)
 
     def contains(self, element):
-        """ Return a boolean indicating whther element is in this set"""
+        """ Return a boolean indicating whther element is in this set
+        Running time: 0(1) """
         #  find bucket index traverse nodes until you find it            # Inpsired by Faith Chikwekwe
-        result = self.ht.contains(element)
-        print("False if the element is not in the collection:", result)
-        return result
+        return self.ht.contains(element)
 
     def add(self, element):
-        """ Add element to this set, if not present already"""
-        if self.contains: # element found
+        """ Add element to this set, if not present already
+        Running time: 0(l)"""
+        if not self.contains(element): # element found
             self.ht.set(element, element)
             self.size += 1 # Update size
-            print("HEY")
 
 
     def remove(self, element):
@@ -42,3 +41,8 @@ class Set(object):
 
     def is_subset(other_set):
         pass
+
+if __name__ == '__main__':
+    s = Set([1, 2, 3])
+    print(s.size)
+    print(s.contains(2))

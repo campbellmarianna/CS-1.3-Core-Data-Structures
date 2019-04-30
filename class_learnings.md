@@ -22,3 +22,6 @@ Book Resource: [Python Crash Course](http://bedford-computing.co.uk/learning/wp-
 
 [DAY 5] When you see node = node.next in a Linkedlist implementation, first we ask the node what is the next node then we assign it to node
 -[Linkedlist Resoureful Article Part 2](https://medium.com/basecs/whats-a-linked-list-anyway-part-1-d8b7e6508b9d)
+
+[DAY 9] Trees in CS are weird upside down trees with nodes, edges, height, levels, depth and a root.
+- [Make School Tree Slides](https://github.com/campbellmarianna/Core-Data-Structures/blob/master/Lessons/slides/Trees.pdf)

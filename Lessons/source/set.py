@@ -9,24 +9,35 @@ class Set(object):
         self.size = 0 # Number of elements
         if elements is not None:
             for element in elements:
+                print('Element:', element)
                 self.add(element)
 
-    def contains(element):
+    def contains(self, element):
+        """ Return a boolean indicating whther element is in this set"""
+        #  find bucket index traverse nodes until you find it            # Inpsired by Faith Chikwekwe
+        result = self.ht.contains(element)
+        print("False if the element is not in the collection:", result)
+        return result
+
+    def add(self, element):
+        """ Add element to this set, if not present already"""
+        if self.contains: # element found
+            self.ht.set(element, element)
+            self.size += 1 # Update size
+            print("HEY")
+
+
+    def remove(self, element):
+        """Remove element from this set, if present, or else raise KeyError"""
         pass
 
-    def add(element):
+    def union(self, other_set):
         pass
 
-    def remove(element):
+    def intersection(self, other_set):
         pass
 
-    def union(other_set):
-        pass
-
-    def intersection(other_set):
-        pass
-
-    def difference(other_set):
+    def difference(self, other_set):
         pass
 
     def is_subset(other_set):

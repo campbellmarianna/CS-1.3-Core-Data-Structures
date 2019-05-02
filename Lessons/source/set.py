@@ -9,7 +9,7 @@ class Set(object):
         self.size = 0 # Number of elements
         if elements is not None:
             for element in elements:
-                print('Element:', element)
+                # print('Element:', element)
                 self.add(element)
 
     def contains(self, element):
@@ -27,22 +27,69 @@ class Set(object):
 
 
     def remove(self, element):
-        """Remove element from this set, if present, or else raise KeyError"""
-        pass
+        """Remove element from this set, if present, or else raise KeyError
+        Running Time: O(l)"""
+        if self.contains(element):
+            self.ht.delete(element)
+            self.size -= 1 # Update size
+        else:
+            raise KeyError('Element not found: {}'.format(element))
 
     def union(self, other_set):
-        pass
+        """Return a new set that is the union of this set and other_set
+        Running Time: O(n) for looping through each entry in the sets to find
+        where they match"""
+        # get items of both set and other_set
+        # Initialize new_set
+        new_set = Set()
+        set = self.ht.items()
+        other_set = other_set.ht.items()
+        # loop through elements and both sets
+        for set_entry in set:
+            for other_set_entry in other_set:
+                # check if the contains is true
+                if self.contains(set_entry) and other_set.contains(other_set_entry):
+                    new_set.add(set_entry)
+                #     then append then to new_set
+        # if not continue till done
+        return new_set
 
     def intersection(self, other_set):
-        pass
+        """Return a new set that is the interection of this set and other_set
+        Running Time: O(n) for looping through each entry in the sets to find
+        where they match"""
+        # Initialize new_set
+        new_set = Set()
+        set = self.ht.items()
+        other_set = other_set.ht.items()
+        for set_entry in set:
+            for other_set_entry in other_set:
+                # check if a element in this set is the same in the other_set
+                if set_entry[1] == other_set_entry[1]:
+                    # append to new_set
+                    new_set.add(set_entry)
+                else:
+                    continue
+        return new_set
 
     def difference(self, other_set):
-        pass
+        """Return a new set that is the difference of this set and other_set"""
+        # Initialize new_set                                                      # Inspired by Dylan Finn
+        new_set = Set()
+        # loop through the keys of the set
+        for set_key in self.ht.keys():
+            # if not in other set
+            if not other_set.ht.contains(set_key):
+                # add key to new set
+                new_set.add(set_key)
+        return new_set
 
     def is_subset(other_set):
+        """Return a boolean indicating whether other_set is a subset of this set"""
         pass
 
 if __name__ == '__main__':
-    s = Set([1, 2, 3])
-    print(s.size)
-    print(s.contains(2))
+    s = Set([4, 5, 8, 11])
+    other_set = Set([4, 6, 8])
+    result = s.difference(other_set)
+    print(result.ht.values()) # [5, 6, 11]

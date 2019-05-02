@@ -30,7 +30,7 @@ class HashTable(object):
         # Calculate load factor                   # Inspired by Faith Chikwekwe
         if len(self.buckets) == 0:
             raise AssertionError("HashTable is empty.")
-        print(self.size, len(self.buckets), self.size/len(self.buckets))
+        # print(self.size, len(self.buckets), self.size/len(self.buckets))
         return self.size / len(self.buckets) # O(n)/(1)
 
     def keys(self):

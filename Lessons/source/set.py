@@ -73,7 +73,9 @@ class Set(object):
         return new_set
 
     def difference(self, other_set):
-        """Return a new set that is the difference of this set and other_set"""
+        """Return a new set that is the difference of this set and other_set
+        Running Time: O(n) for looping through each key in the set to check if
+        each one is in the subset"""
         # Initialize new_set                                                      # Inspired by Dylan Finn
         new_set = Set()
         # loop through the keys of the set
@@ -84,12 +86,24 @@ class Set(object):
                 new_set.add(set_key)
         return new_set
 
-    def is_subset(other_set):
-        """Return a boolean indicating whether other_set is a subset of this set"""
-        pass
+    def is_subset(self, other_set):
+        """Return a boolean indicating whether other_set is a subset of this set
+        Running Time: O(n) for looping through each key in the set to check if
+        each one is in the subset"""
+        # create a counter found
+        found = 0
+        # loop through the keys of the other set and check if they are in this set
+        for other_set_key in other_set.ht.keys():
+            if self.ht.contains(other_set_key):
+                # if so then w increment found
+                found += 1
+        # check if all entries were found in sub_set
+        if found == other_set.ht.length():
+            return True
+        return False
 
 if __name__ == '__main__':
-    s = Set([4, 5, 8, 11])
-    other_set = Set([4, 6, 8])
-    result = s.difference(other_set)
-    print(result.ht.values()) # [5, 6, 11]
+    s = Set([4, 5, 9, 8])
+    assert s.size == 4
+    other_set = Set([5, 9])
+    print(s.is_subset(other_set))

@@ -47,3 +47,15 @@ class SetTest(unittest.TestCase):
         assert s.size == 4
         other_set = Set([4, 6, 8])
         s.difference(other_set) == [5, 6, 11]
+
+    def test_is_subset(self):
+        s = Set([4, 5, 9, 8])
+        assert s.size == 4
+        other_set = Set([5, 9])
+        s.is_subset(other_set) == True
+
+    def test_is_subset(self):
+        s = Set([4, 5, 9, 8, 1, 2,])
+        assert s.size == 6
+        other_set = Set([3])
+        s.is_subset(other_set) == False

@@ -74,8 +74,8 @@ class Set(object):
 
     def difference(self, other_set):
         """Return a new set that is the difference of this set and other_set
-        Running Time: O(n) for looping through each key in the set to check if
-        each one is in the subset"""
+        Running Time: O(n) for looping through each key in the set to check
+        if a key in the set is in the other set """
         # Initialize new_set                                                      # Inspired by Dylan Finn
         new_set = Set()
         # loop through the keys of the set

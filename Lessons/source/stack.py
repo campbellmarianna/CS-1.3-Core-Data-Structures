@@ -58,7 +58,7 @@ class LinkedStack(object):
         have to traverse the rest of the list."""
         # Remove and return top item, if any
         # Raise value error if stack is empty
-        if is_empty() == True:
+        if self.is_empty() == True:
             raise ValueError("Stack is empty")
         # Save the item to be deleted
         item = self.peek()
@@ -129,5 +129,5 @@ class ArrayStack(object):
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-# Stack = LinkedStack
-Stack = ArrayStack
+Stack = LinkedStack
+# Stack = ArrayStack

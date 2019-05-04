@@ -29,7 +29,7 @@ class LinkedQueue(object):
 
     def length(self):
         """Return the number of items in this queue."""
-        # TODO: Count number of items
+        # Count number of items
         return self.list.length() # Count number of items
 
     def enqueue(self, item):
@@ -122,5 +122,5 @@ class ArrayQueue(object):
             return self.list.pop(0)
 # Implement LinkedQueue and ArrayQueue above, then change the assignment below
 # to use each of your Queue implementations to verify they each pass all tests
-# Queue = LinkedQueue
-Queue = ArrayQueue
+Queue = LinkedQueue
+# Queue = ArrayQueue

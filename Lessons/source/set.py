@@ -42,16 +42,18 @@ class Set(object):
         # get items of both set and other_set
         # Initialize new_set
         new_set = Set()
-        set = self.ht.items()
-        other_set = other_set.ht.items()
+        # set = self.ht.items()
+        # other_set = other_set.ht.items()
         # loop through elements and both sets
-        for set_entry in set:
-            for other_set_entry in other_set:
-                # check if the contains is true
-                if self.contains(set_entry) and other_set.contains(other_set_entry):
-                    new_set.add(set_entry)
-                #     then append then to new_set
-        # if not continue till done
+        for set_key in self.ht.keys():
+            # if the element from the set is not in the new set add it
+            if not new_set.contains(set_key):
+                new_set.add(set_key)
+        for other_set_key in other_set.ht.keys():
+            # if the element from the set is not in the new set add it
+            if not new_set.contains(other_set_key):
+                new_set.add(other_set_key)
+
         return new_set
 
     def intersection(self, other_set):
@@ -82,8 +84,17 @@ class Set(object):
         for set_key in self.ht.keys():
             # if not in other set
             if not other_set.ht.contains(set_key):
+                print("Not found in other set: ", set_key)
                 # add key to new set
                 new_set.add(set_key)
+
+        # loop through the keys of the set
+        for other_set_key in other_set.ht.keys():
+            # if not in other set
+            if not self.ht.contains(other_set_key):
+                print("Not found in set: ", set_key)
+                # add key to new set
+                new_set.add(other_set_key)
         return new_set
 
     def is_subset(self, other_set):
@@ -103,7 +114,8 @@ class Set(object):
         return False
 
 if __name__ == '__main__':
-    s = Set([4, 5, 9, 8])
-    assert s.size == 4
-    other_set = Set([5, 9])
-    print(s.is_subset(other_set))
+    s = Set([2, 11])
+    s.size == 2
+    other_set = Set([4, 6, 8])
+    print(s.difference(other_set).ht.keys())
+    # print(s.union(other_set).ht.keys())

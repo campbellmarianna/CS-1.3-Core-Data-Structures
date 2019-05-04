@@ -122,5 +122,5 @@ class ArrayQueue(object):
             return self.list.pop(0)
 # Implement LinkedQueue and ArrayQueue above, then change the assignment below
 # to use each of your Queue implementations to verify they each pass all tests
-Queue = LinkedQueue
-# Queue = ArrayQueue
+# Queue = LinkedQueue
+Queue = ArrayQueue

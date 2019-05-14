@@ -36,7 +36,7 @@ def contains(text, pattern):
 
     return False
 
-def find_index(text, pattern):
+def find_index(text, pattern, start_index=0):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)

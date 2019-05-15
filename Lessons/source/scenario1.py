@@ -47,13 +47,14 @@ def is_prefix_match_and_get_price(ht, phone_num):
     Return True if the prefix we have on record is the start of a phone we give
     as input otherwise return False
     """
-    print("Phone Number:", phone_num)
+    # print("Phone Number:", phone_num)
     # base case
     if not phone_num:
         return 0
 
     #check if the phone number is in the HashTable
     if ht.contains(phone_num):
+        # print("What we get:", ht.get(phone_num))
         # if yes, return the price
         return ht.get(phone_num)
     #if not, pop off the last digit of the phone number
@@ -95,6 +96,7 @@ if __name__ == '__main__':
     # print("***")
     ht = init_hashtable(route_costs)
     phone_numbers = load_phone_nums()
-    print(get_prices(phone_numbers, is_prefix_match_and_get_price, ht))
+    price_list = get_prices(phone_numbers, is_prefix_match_and_get_price, ht)
+    print(price_list)
     # print(is_prefix_match_and_get_price(ht, phone_numbers))
     # print(load_phone_nums())

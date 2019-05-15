@@ -190,7 +190,6 @@ class LinkedList(object):
         node = self.head  # Constant time to assign a variable reference
         # Loop until the node is None, which is one node too far past the tail
         while node is not None:  # Up to n iterations if we don't exit early
-            print(node)
             # Check if this node's data satisfies the given quality function
             if quality(node.data):  # Constant time to call quality function
                 # We found data satisfying the quality function, so exit early

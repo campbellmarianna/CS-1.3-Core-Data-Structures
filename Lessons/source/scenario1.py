@@ -16,26 +16,48 @@ from hashtable import HashTable
 
 def load_data():
     """
-    Returns a list of phone numbers from a file.
+    Returns a list of phone numbers and prices from a file.
     """
+    route_costs = []
     with open('../../project/data/route-costs-4.txt', 'r') as f:
-        # f_contents = f.readlines() # list of each line of the file
-        # print(f_contents)
-        numbers = f.read().split("\n")
-    return numbers
+        for line in f:
+            prefix, price = line.split(',')
+            route_costs.append((prefix, price))
+    return route_costs
 
-def init_hashtable(numbers):
+def init_hashtable(route_costs, phone_num):
+    """
+    Add phone number (key) and price (value) in the hashtable and return
+    hashtable items to proven the data is inserted correctly.
+    """
     output_list = []
-    ht = HashTable(4)
-    for number in numbers: # number gives up +
-        combo = number.split(',')
-        print(combo)
-        num = combo[0]
-        price = combo[1]
-        ht.set(num, price)
-    return ht.items()
+    num_buckets = len(route_costs)
+    ht = HashTable(num_buckets)
+    for prefix, price in route_costs: # number gives up +
+        print("Phone number and price:", prefix, price)
+        ht.set(prefix, price)
+    print("Phone Number:", phone_num)
+    # Check if have a prefix that matches the start of a phone_num
+    if ht.contains(phone_num):
+        return print("Route Cost for {}: ${}".format(phone_num, ht.get(phone_num)))
+    else:
+        raise ValueError("Phone number not found.")
+
+def is_prefix_match_and_get_price(phone_num):
+    """
+    Return True if the prefix we have on record is the start of a phone we give
+    as input otherwise return False
+    """
+    # you've got a phone do we have a prefix that matches it
+    # contains
+    # get the price
+
+    if self.contains(phone_num):
+        self.get()
 
 
 if __name__ == '__main__':
-    numbers = load_data()
-    print(init_hashtable(numbers))
+    route_costs = load_data()
+    print("Phone Numbers and Prices:", route_costs)
+    print("***")
+    print(init_hashtable(route_costs, '+15124156620'))

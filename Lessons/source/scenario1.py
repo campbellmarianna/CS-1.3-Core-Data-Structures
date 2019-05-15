@@ -7,25 +7,28 @@ and a single phone number. How quickly can you find the cost of calling this num
 # Check if the number makes the given number
 # if it does return the set second value
 # Else phone number not found
-
+# 4 minutes first time
 #!python
+import time
+
 from pprint import pprint
 from hashtable import HashTable
-import glob
+# import glob
 import os
 
 def load_data():
     """
     Returns a list of phone prefixes and prices from a file.
     """
-    all_route_costs = glob.glob(os.path.join('', 'route-costs-*.txt'))
+    # all_route_costs = glob.glob(os.path.join('', 'route-costs-*.txt'))
     route_costs = []
-    for route in all_route_costs:
-        with open(route, 'r') as f:
-            for line in f:
-                prefix, price = line.split(',')
-                pprice = price.replace("\n", "")
-                route_costs.append((prefix, pprice))
+    # for route in all_route_costs:
+        # with open(route, 'r') as f:
+    with open('route-costs-10000000.txt', 'r') as f:
+        for line in f:
+            prefix, price = line.split(',')
+            pprice = price.replace("\n", "")
+            route_costs.append((prefix, pprice))
     return route_costs
     # put file names in a list
     # loop through each file
@@ -98,6 +101,7 @@ def load_phone_nums():
 
 
 if __name__ == '__main__':
+    start = time.time()
     route_costs = load_data()
     # print("Phone Numbers and Prices:", route_costs)
     # print("***")
@@ -107,3 +111,5 @@ if __name__ == '__main__':
     print(price_list)
     # print(is_prefix_match_and_get_price(ht, phone_numbers))
     # print(load_phone_nums())
+    end = time.time()
+    print(end - start)

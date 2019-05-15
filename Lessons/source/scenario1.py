@@ -11,18 +11,25 @@ and a single phone number. How quickly can you find the cost of calling this num
 #!python
 from pprint import pprint
 from hashtable import HashTable
+import glob
+import os
 
 def load_data():
     """
     Returns a list of phone prefixes and prices from a file.
     """
+    all_route_costs = glob.glob(os.path.join('', 'route-costs-*.txt'))
     route_costs = []
-    with open('../../project/data/route-costs-4.txt', 'r') as f:
-        for line in f:
-            prefix, price = line.split(',')
-            pprice = price.replace("\n", "")
-            route_costs.append((prefix, pprice))
+    for route in all_route_costs:
+        with open(route, 'r') as f:
+            for line in f:
+                prefix, price = line.split(',')
+                pprice = price.replace("\n", "")
+                route_costs.append((prefix, pprice))
     return route_costs
+    # put file names in a list
+    # loop through each file
+        # open each file
 
 def init_hashtable(route_costs):
     """
@@ -81,7 +88,7 @@ def load_phone_nums():
     """
     phone_numbers = []
 
-    with open('../../project/data/phone-numbers-3.txt', 'r') as f:
+    with open('../../project/data/phone-numbers-10000.txt', 'r') as f:
         for line in f:
             # print(line)
             individual_phone_num = line.replace("\n", "")

@@ -25,3 +25,9 @@ Book Resource: [Python Crash Course](http://bedford-computing.co.uk/learning/wp-
 
 [DAY 9] Trees in CS are weird upside down trees with nodes, edges, height, levels, depth and a root.
 - [Make School Tree Slides](https://github.com/campbellmarianna/Core-Data-Structures/blob/master/Lessons/slides/Trees.pdf)
+
+[DAY 11] Recursion is a function called when it is done it returns to where it was called.
+-
+
+[DAY 14] Spend more time doing the stuff that matters.
+- [Twilio Documentation](https://www.twilio.com/docs/api)

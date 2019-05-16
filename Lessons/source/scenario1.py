@@ -30,9 +30,6 @@ def load_data():
             pprice = price.replace("\n", "")
             route_costs.append((prefix, pprice))
     return route_costs
-    # put file names in a list
-    # loop through each file
-        # open each file
 
 def init_hashtable(route_costs):
     """
@@ -43,10 +40,7 @@ def init_hashtable(route_costs):
     num_buckets = len(route_costs)
     ht = HashTable(num_buckets)
     for prefix, price in route_costs: # number gives up +
-        # print("Phone number and price:", prefix, price)
         ht.set(prefix, price)
-
-    # Check if have a prefix that matches the start of a phone_num
 
     return ht
 
@@ -57,14 +51,12 @@ def is_prefix_match_and_get_price(ht, phone_num):
     Return True if the prefix we have on record is the start of a phone we give
     as input otherwise return False
     """
-    # print("Phone Number:", phone_num)
     # base case
     if not phone_num:
         return 0
 
     #check if the phone number is in the HashTable
     if ht.contains(phone_num):
-        # print("What we get:", ht.get(phone_num))
         # if yes, return the price
         return ht.get(phone_num)
     #if not, pop off the last digit of the phone number

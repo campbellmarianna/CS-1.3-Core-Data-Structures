@@ -1,12 +1,7 @@
 '''Scenario 1: One-time route cost check
 You have a carrier route list with 100,000 (100K) entries (in arbitrary order)
 and a single phone number. How quickly can you find the cost of calling this number?'''
-# Check the book for number and get the price
-# Open the file put file info into a list
-# Loop through it
-# Check if the number makes the given number
-# if it does return the set second value
-# Else phone number not found
+# This solution works for all scenarios
 # 4 minutes first time
 #!python
 import time
@@ -24,7 +19,7 @@ def load_data():
     route_costs = []
     # for route in all_route_costs:
         # with open(route, 'r') as f:
-    with open('route-costs-10000000.txt', 'r') as f:
+    with open('route-costs-4.txt', 'r') as f:
         for line in f:
             prefix, price = line.split(',')
             pprice = price.replace("\n", "")
@@ -39,9 +34,9 @@ def init_hashtable(route_costs):
     output_list = []
     num_buckets = len(route_costs)
     ht = HashTable(num_buckets)
-    for prefix, price in route_costs: # number gives up +
-        ht.set(prefix, price)
 
+    for prefix, price in route_costs:
+        ht.set(prefix, price)
     return ht
 
 
@@ -65,7 +60,6 @@ def is_prefix_match_and_get_price(ht, phone_num):
         return is_prefix_match_and_get_price(ht, phone_num)
 
 def get_prices(phone_numbers, is_prefix_match_and_get_price, ht):
-    #create prices list
     price_list = []
 
     #loop through the phone numbers
@@ -73,7 +67,14 @@ def get_prices(phone_numbers, is_prefix_match_and_get_price, ht):
         #pass one phone number into the prefix match function
         # append price to the list
         price = is_prefix_match_and_get_price(ht, number)
-        price_list.append((number, price))
+        print("Hello Price:", price)
+        # open the file
+        with open('route-costs-3.txt', 'a') as f:
+            # write to the file
+            # each phone number and price on new line
+            f.write("%s, %s \n" % (number, str(price) ))
+        # What we did before
+        # price_list.append((number, price))
 
     return price_list
 
@@ -83,9 +84,9 @@ def load_phone_nums():
     """
     phone_numbers = []
 
-    with open('../../project/data/phone-numbers-10000.txt', 'r') as f:
+    with open('../../project/data/phone-numbers-3.txt', 'r') as f:
         for line in f:
-            # print(line)
+            print(line)
             individual_phone_num = line.replace("\n", "")
             phone_numbers.append(individual_phone_num)
 
@@ -95,13 +96,9 @@ def load_phone_nums():
 if __name__ == '__main__':
     start = time.time()
     route_costs = load_data()
-    # print("Phone Numbers and Prices:", route_costs)
-    # print("***")
     ht = init_hashtable(route_costs)
     phone_numbers = load_phone_nums()
     price_list = get_prices(phone_numbers, is_prefix_match_and_get_price, ht)
     print(price_list)
-    # print(is_prefix_match_and_get_price(ht, phone_numbers))
-    # print(load_phone_nums())
     end = time.time()
     print(end - start)

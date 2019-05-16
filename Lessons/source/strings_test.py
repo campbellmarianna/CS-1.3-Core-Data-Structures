@@ -28,8 +28,8 @@ class StringsTest(unittest.TestCase):
         assert contains('abc', 'az') is False  # first letter, but not last
         assert contains('abc', 'abz') is False  # first 2 letters, but not last
         # Write more negative test cases with assert is False statements
-        assert contains('abcabc', 'abcb') is False # first letters, but not the last one
-        assert contains('abcabc', 'abcc') is False # first letters, but not the last one
+        assert contains('abcabc', 'bz') is False # important to test close cases
+        assert contains('abcabc', 'ba') is False # important to test close cases
 
     def test_contains_with_complex_patterns(self):
         # Difficult test cases (examples) with complex patterns

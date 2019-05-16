@@ -4,37 +4,33 @@ def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # Implement contains here (iteratively and/or recursively)
-    # Keeping track of target values
-    target_length = len(pattern) - 1
-    target_index = 0
-    # Keeping track of text values
-    text_length = len(text) - 1
-    text_index = 0
-
-    match = None
-    # All strings contains empty string
-    if pattern == '':
+    result = find_index(text, pattern)
+    # if the pattern is not found in
+    if result is None:
+        return False
+    if result >= 0:
+        # return result
         return True
-    # Check if we passed the end of the text or the pattern
-    while target_length >= target_index and text_length >= text_index:
-        # Checking if current pattern and text letters match
-        if pattern[target_index] == text[text_index]:
-            target_index += 1
-            text_index += 1
-            # If we passed the end of the pattern only then we have found the match
-            if target_index > target_length:
-                return True
-        # If it is not a match and were still on the first letter of the pattern
-        # then increment text_index
-        elif pattern[target_index] != text[text_index] and target_index == 0:
-            text_index += 1
-        # If it is not a match and were past the first letter of the pattern
-        # reset the pattern index
-        elif pattern[target_index] != text[text_index] and target_index > 0:
-            target_index = 0
 
-    return False
+    # if pattern == '':
+    #     return 0
+    # for t_index, t_char in enumerate(text): # 0(t)
+    #     for p_index, p_char in enumerate(pattern): # 0(p)
+    #         # check if more characters in the text match characters in the pattern
+    #         text_char = text[t_index + p_index]
+    #         # check if letters are the same
+    #         if text_char == p_char:
+    #             continue
+    #         # they are not the same
+    #         else:
+    #             break
+    #     else:                                                                     # Really helpful resource to find solution: https://www.python-course.eu/python3_for_loop.php
+    #         # all characters in the pattern matched in the text
+    #         return True
+    #
+    # # tried all possible starting indexes in text, never found a perfect match
+    # return False
+
 
 def find_index(text, pattern, start_index=0):
     """Return the starting index of the first occurrence of pattern in text,
@@ -43,6 +39,7 @@ def find_index(text, pattern, start_index=0):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     if pattern == '':
         return 0
+    # Before we check the text and pattern lets make sure the pattern occurs in the text
     for t_index, t_char in enumerate(text):
         for p_index, p_char in enumerate(pattern):
             # check if more characters in the text match characters in the pattern
@@ -96,6 +93,9 @@ def find_all_indexes(text, pattern):
     # all characters in the pattern matched in the text
     return match
 
+# if this pattern is contained in the text
+# get this functions find_index property and return that
+# get this functions find_all_index property and return that
 
 
 def test_string_algorithms(text, pattern):
@@ -128,5 +128,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
     # print(find_all_indexes('aaaaa', 'aa'))
+    print(contains('abcabc', 'abcb'))

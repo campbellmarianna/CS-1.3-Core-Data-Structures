@@ -1,8 +1,6 @@
-'''Scenario 1: One-time route cost check
-You have a carrier route list with 100,000 (100K) entries (in arbitrary order)
-and a single phone number. How quickly can you find the cost of calling this number?'''
 # This solution works for all scenarios
 # 4 minutes first time
+# currently takes 2 minutes to run
 #!python
 import time
 
@@ -61,13 +59,11 @@ def is_prefix_match_and_get_price(ht, phone_num):
 
 def get_prices(phone_numbers, is_prefix_match_and_get_price, ht):
     price_list = []
-
     #loop through the phone numbers
     for number in phone_numbers:
         #pass one phone number into the prefix match function
         # append price to the list
         price = is_prefix_match_and_get_price(ht, number)
-        print("Hello Price:", price)
         # open the file
         with open('route-costs-3.txt', 'a') as f:
             # write to the file

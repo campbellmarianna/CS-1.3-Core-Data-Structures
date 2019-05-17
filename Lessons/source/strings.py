@@ -1,11 +1,11 @@
 #!python
 
 def contains(text, pattern):
-    """Return a boolean indicating whether pattern occurs in text.Best and worst
-     case running time: 0(t * p) for t characters in the text and p characters
-     in the pattern. We always have to loop through each character in the pattern
-      if it is found in the text
-      Space: o(1)"""
+    """Return a boolean indicating whether pattern occurs in text.
+    Running time: 0(t * p) for t characters in the text and p characters in the
+    pattern. For every character in the text we always loop through the whole
+    pattern.
+    Space: o(1)"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     result = find_index(text, pattern) # (t * p)
@@ -16,31 +16,12 @@ def contains(text, pattern):
         # return result
         return True
 
-    # if pattern == '':
-    #     return 0
-    # for t_index, t_char in enumerate(text): # 0(t)
-    #     for p_index, p_char in enumerate(pattern): # 0(p)
-    #         # check if more characters in the text match characters in the pattern
-    #         text_char = text[t_index + p_index]
-    #         # check if letters are the same
-    #         if text_char == p_char:
-    #             continue
-    #         # they are not the same
-    #         else:
-    #             break
-    #     else:                                                                     # Really helpful resource to find solution: https://www.python-course.eu/python3_for_loop.php
-    #         # all characters in the pattern matched in the text
-    #         return True
-    #
-    # # tried all possible starting indexes in text, never found a perfect match
-    # return False
-
 
 def find_index(text, pattern, start_index=0):
     """Return the starting index of the first occurrence of pattern in text,
-    or None if not found. Best and worst case running time: 0(t * p) for t
-    characters in the text and p characters in the pattern. We always have to loop
-    through each character in the pattern if it is found in the text
+    or None if not found.
+    Running time: 0(t * p) for t characters in the text and p characters in the
+    pattern. For every character in the text we always loop through the whole pattern.
     Space: 0(1)"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
@@ -67,65 +48,62 @@ def find_index(text, pattern, start_index=0):
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
-    or an empty list if not found. Best and worst case running time: 0(t * p) for t
-    characters in the text and p characters in the pattern. We always have to loop
-    through each character in the pattern if it is found in the text
-    Space: O(t)"""
+    or an empty list if not found.
+    Running time: 0(t * p) for t characters in the text and p characters in the
+    pattern. For every character in the text we always loop through the whole pattern.
+    Space complexity: O(t) for characters in the text"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # match = []
-    # if pattern == '':
-    #     for index in range(len(text)):
-    #         match.append(index)
-    #     return match
-    # for t_index, t_char in enumerate(text):
-    #     for p_index, p_char in enumerate(pattern): # Always p iterations because no early exit
-    #         # check if more characters in the text match characters in the
-    #         # pattern
-    #         # check if it is a valid index of the text
-    #         if t_index + p_index > (len(text)-1):
-    #             break # not a valid index
-    #         text_char = text[t_index + p_index]
-    #         # check if letters are the same
-    #         if text_char == p_char:
-    #             # check if the letters are the same and we've reached the last
-    #             # index of the pattern
-    #             if p_index == (len(pattern) - 1):
-    #             # append the position of the charc where the pattern and text
-    #                 # first matched
-    #                 match.append(t_index)
-    #                 # append the text index minus the pattern index
-    #             continue
-    #         # they are not the same
-    #         else:
-    #             break
-    # # all characters in the pattern matched in the text
-    # return match
-
+    # def find_all_index(text, pattern):
     match = []
     if pattern == '':
         for index in range(len(text)):
             match.append(index)
         return match
-    result = 0
-
-    while result is not None and result < len(text):
-        if result == 0:
-            # call find index
-            result = find_index(text, pattern, result)
-            # append result to list
-            match.append(result)
-        else
-            # call find index
-            result = find_index(text, pattern, result + 1)
-            # append result to list
-            match.append(result)
-    # return list
+    for t_index, t_char in enumerate(text):
+        for p_index, p_char in enumerate(pattern): # Always p iterations because no early exit
+            # check if more characters in the text match characters in the pattern
+            # check if it is a valid index of the text
+            if t_index + p_index > (len(text)-1):
+                break # not a valid index
+            text_char = text[t_index + p_index]
+            # check if letters are the same
+            if text_char == p_char:
+                # check if the letters are the same and we've reached the last
+                # index of the pattern
+                if p_index == (len(pattern) - 1):
+                # append the position of the charc where the pattern and text
+                    # first matched
+                    match.append(t_index)
+                    # append the text index minus the pattern index
+                continue
+            # they are not the same
+            else:
+                break
+    # all characters in the pattern matched in the text
     return match
 
-# if this pattern is contained in the text
-# get this functions find_index property and return that
-# get this functions find_all_index property and return that
+    # Attempt to prevent duplicating code in the third function:
+    # match = []
+    # if pattern == '':
+    #     for index in range(len(text)):
+    #         match.append(index)
+    #     return match
+    # result = 0
+    #
+    # while result is not None and result < len(text):
+    #     if result == 0:
+    #         # call find index
+    #         result = find_index(text, pattern, result)
+    #         # append result to list
+    #         match.append(result)
+    #     else
+    #         # call find index
+    #         result = find_index(text, pattern, result + 1)
+    #         # append result to list
+    #         match.append(result)
+    # # return list
+    # return match
 
 
 def test_string_algorithms(text, pattern):
@@ -160,4 +138,4 @@ def main():
 if __name__ == '__main__':
     # main()
     # print(find_all_indexes('aaaaa', 'aa'))
-    print(find_all_indexes('abc', 'a'))
+    print(contains('abcabc', 'abcb'))

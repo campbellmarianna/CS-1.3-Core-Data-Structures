@@ -1,6 +1,8 @@
 # # Call Routing Project
+# *** Pseudocoding solution ideas below, code for scenarios are in scenarios.py***
 # Problem - You have a phone number and you want to loop it you have
 # Similar to routing in node
+
 """
 Scenario 1: One-time route cost check
 
